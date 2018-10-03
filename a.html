@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Greetings</title>
+<script>
+    
+    var tekst = prompt("Geef een palindroom");
+
+    if (isPalindrome(tekst)) {
+        document.write(tekst + " is een palindroom");
+    } else {
+        document.write (tekst + " is geen palindroom");
+    }
+
+    function Palindroom (palindroom) {
+        for (let i = 0; i < palindroom.length; i++) {
+            if(palindroom.charAt [i] != palindroom.charAt [palindroom.length -i -1]){
+            return false;
+        } 
+    else return true;
+    }
+    }
+
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+            /* De container */
+            #id {
+                position: relative;
+                width: 400px;
+                height: 400px;
+                border: 2px solid black;
+            }
+            /* de tekening van het lieve konijntje */
+            #image {
+                position: absolute;
+                width: 75px; /* het moet geen Vlaamse reus worden */
+            }
+            #image2 {
+                position: absolute;
+                width: 250px; /* het moet geen Vlaamse reus worden */
+            }
+            #doodkonijn {
+                width: 75px;
+                position: absolute;
+                top: 300px;
+                left: 175px;
+    
+
+                -webkit-transform: rotate(180deg);
+                -moz-transform: rotate(180deg);
+                -o-transform: rotate(180deg);
+                -ms-transform: rotate(180deg);
+                transform: rotate(180deg);
+            }
+            /* klasse om het konijntje te verbergen */
+            .hidden {
+                display: none;
+            }
+            /* klasse om het konijntje te tonen */
+            .visible {
+                display: block;
+            }
+        </style>
+
+    <title>Lief klein KILLER RABBIT! </title>
+</head>
+
+<body>  
+    <div id="id">
+        <img id="image" class="hidden" src="konijntje.jpg" alt="rabbit">
+        <img id="image2" class="hidden" src="ghost.jpg" alt="ghost">
+        <img id="doodkonijn" class="hidden" src="konijntje.jpg" alt="rabbit">
+    </div>
+    <p id="resultaat"></p>
+<script>
+    let imageEl = document.getElementById("image");
+    let imageEl2 = document.getElementById("image2");
+    let imageDead = document.getElementById("doodkonijn");
+    let resultaatEl = document.getElementById("resultaat");
+    let wachttijd = getRandomIntInclusive(500, 5000);
+    let handle;
+    setTimeout(start, wachttijd);
+
+    function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    //The maximum is inclusive and the minimum is inclusive 
+    return Math.floor(Math.random() * (max - min + 1)) + min; 
+}
+    function toonKonijn() {
+     let X = getRandomIntInclusive(0, 350);
+     let Y = getRandomIntInclusive(0, 350);
+     imageEl.style.cssText = `top:${X}px;left:${Y}px`;
+     imageEl.className = "visible";
+}
+    function verbergKonijn() {
+     imageEl.className = "hidden";
+}
+
+function start(){
+     toonKonijn();
+     let toontijd = getRandomIntInclusive(500, 1500);
+     handle = setTimeout(stop, toontijd);
+     imageEl.addEventListener("click",setGewonnen);
+}
+function setGewonnen(){
+      clearTimeout(handle);
+      imageEl.imageDead;
+      imageDead.removeEventListener("click", setGewonnen);
+      imageDead.className = "visible";
+      resultaatEl.textContent="Konijn is DOOD";
+      imageEl2.className = "visible";
+      
+}
+
+
+</script>    
+</body>
+</html>

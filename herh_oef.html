@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ploeg</title>
+    <style>
+        li {
+            width: 300px;
+            position: relative;
+        }
+        li > button{
+            position: absolute;
+            right: 0px;
+        }
+    </style>
+    
+</head>
+<body>
+        <label for="voornaam">Voornaam: <input type="text" id="voornaam"></label>
+        <label for="achternaam">Achternaam: <input type="text" id="achternaam"></label>
+        <button onclick="voegToe();">Toevoegen</button>
+        <button onclick="toonPloeg();">Toon namen</button>
+        <ul id="ploeg"></ul>
+</body>
+
+<script>
+        document.addEventListener("DOMContentLoaded", function(){
+      });
+
+        let ploeg=[] 
+        ploeg.push(new Persoon("Karen", "Damen"));
+        ploeg.push(new Persoon("Kristel", "Verbeke"));
+        ploeg.push(new Persoon("Katheen", "Aerts"));
+
+        function Persoon(vnaam, anaam){
+                this.voornaam = vnaam;
+                this.achternaam = anaam;
+            }
+            Persoon.prototype.toString = function(){
+                return this.voornaam + " " + this.achternaam;
+            }
+        
+        function toonPloeg(){
+           let ploeglijst = document.getElementById("ploeg");
+           ploeglijst.innerHTML="";
+            for (let i = 0; i < ploeg.length; i++) {
+               let ploegLi = document.createElement("li");
+                ploegLi.textContent = ploeg[i];
+                ploeglijst.appendChild(ploegLi); 
+
+                let buttonEl = document.createElement("button");
+                buttonEl.textContent = "Verwijderen";
+                buttonEl.setAttribute("onclick",`verwijder(${i})`);
+                ploeglijst.appendChild(buttonEl);
+            
+            }
+        }
+
+        function voegToe(){
+            let ploeglijst = document.getElementById("ploeg");
+            let vnaam = document.getElementById("voornaam");
+            let anaam = document.getElementById("achternaam");
+            ploeg.push(new Persoon( vnaam.value, anaam.value)); 
+            toonPloeg();
+        }
+
+         function verwijder(index){
+            ploeg.splice(index,1);
+            toonPloeg();
+        }
+
+
+        window.onload = function(){
+            let btn = document.getElementById("toonPloeg");
+            let btn2 = document.getElementById("voegToe");
+            btn2.onclick = voegToe;
+            btn.onclick = toonPloeg;
+        }
+
+        </script>
+
+</html>

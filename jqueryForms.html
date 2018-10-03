@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .error {
+            color:red;
+            display:none;
+        }
+    </style>
+    <script src="jquery.js"></script>
+    <script>
+        $(function(){
+            $('#q').blur(function(){
+                if (this.value === "") {
+                    $('#error').show();
+                }else{
+                    $('#error').hide();
+                }
+            });
+            $('#frm').submit(function(event){
+                if($('#q').val() === ""){
+                    $('#error').show();
+                    event.preventDefault();
+                }else{
+                    $('#error').hide();
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <form action="https://www.google.be/search" id="frm" method="GET">
+        <label for="q">Zoekterm<input type="text" id="q" name="q"></label>
+        <input type="submit" value="zoeken">
+        <div id="error" class="error">U moet een zoekterm invullen</div>
+    </form>
+</body>
+</html>

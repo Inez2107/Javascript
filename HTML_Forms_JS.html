@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document</title>
+    <style>
+       
+    </style>
+</head>
+<body>
+   <label>Voornaam: <input type="text" id="voornaam" name="voornaam"></label> 
+   <label> Achternaam: <input type="text" id="achternaam" name="achternaam"> </label>
+   <button id="btn"> Toevoegen </button>
+    <ol id="resultaat"></ol>  
+</body>
+    <script> 
+        "use strict";
+        document.addEventListener("DOMContentLoaded", function(){
+            let button = document.getElementById("btn");
+            button.onclick = voegElementToe;
+        });
+        function toevoegen(){
+            let voornaamEl = document.getElementById("voornaam");
+            let voornaam = voornaamEl.value;
+            let achternaamEl = document.getElementById("achternaam");
+            let achternaam = achternaamEl.value;
+            let liEl = document.createElement("li");
+            liEl.textContent = voornaam + " " + achternaam;
+            let olEl = document.getElementById("resultaat");
+            let beforeElement = null;
+            for (let i = 0; i < olEl.children.length; i++) {
+                let currentElement = olEl.children.item(i);
+                if (currentElement.textContent > liEl.textContent){
+                    beforeElement = currentElement;
+                    break;
+                }
+            }
+            olEl.insertBefore(liEl, beforeElement);
+        }
+    </script>
+<body>
+    <label>Voornaam: <input type="text" id="voornaam"></label>
+    <label>Achternaam: <input type="text" id="achternaam"></label>
+    <button id="btn">Toevoegen</button>
+    <ol id="resultaat"></ol>
+</body>
+</html>

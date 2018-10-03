@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        label{
+            display: block;
+            grid-template-columns: 85px 300px;
+        }
+    </style>
+    <title>Een lijst met namen</title>
+</head>
+<body>
+    <form> 
+        <label for= "voornaam"> Voornaam:</label> <input type="text" id="voornaam">
+        <label for= "achternaam">Achternaam: </label> <input type="text" id="achternaam">
+        <button id="btnToevoegen"  type="button">Voeg toe</button>
+        <table>
+                <thead><th>Voornaam</th><th>Achternaam</th></thead>
+                <tbody id="tablebody"></tbody>
+            </table>
+        <ol id= "gegevens"></ol>
+    </form>
+  </body>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function(){
+          let btn = document.getElementById("btnToevoegen");
+          btn.onclick = toevoegen;
+      });
+
+      function toevoegen() {
+          let voornaamEl = document.getElementById("voornaam");
+          let voornaam = voornaamEl.value;
+          let achternaamEl = document.getElementById("achternaam");
+          let achternaam = achternaamEl.value;
+          let button = document.getElementById("button");
+          let listEl = document.createElement("li");
+          let orgListEl = document.getElementById("gegevens");
+
+          listEl.textContent = voornaam + " " + achternaam;
+           let beforeElement = null;
+            for (let i = 0; i < orgListEl.children.length; i++) {
+                let currentElement = orgListEl.children.item(i);
+                if (currentElement.textContent > listEl.textContent){
+                    beforeElement = currentElement;
+                    break;
+                }
+            }
+            orgListEl.insertBefore(listEl, beforeElement);
+      }
+  
+  </script>
+
+</html>
