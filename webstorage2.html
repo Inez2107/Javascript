@@ -37,42 +37,51 @@
             new Product(2, "gom", 5),
             new Product(3, "lat", 10)
         ]
-        $(function(){
+             $(function(){
+            toonBestellijnen();
             $select = $('#producten');
             producten.forEach(p => {
                 $option = $('<option>').val(p.id).text(p);
                 $select.append($option);
             })
+            $('#btnToevoegen').click(function(){
+                let productid = $select.val();
+                let aantal = $('#aantal').val();
+                $('#aantal').val("0");
+                let product = producten.find( p => p.id == productid);
+                let bestellijn = new Bestellijn(product, aantal);
+                bestellijnen.push(bestellijn);
+                toonBestellijnen();
+            });
         });
+
         let bestellijnen = [];
         function toonBestellijnen(){
             let $bestellijnen = $('#bestellijnen');
             if (bestellijnen.length == 0){
                 $bestellijnen.hide();
-                return
-            }   
-
-            for(let i=0;i<bestellijnen.length;i++){
-                let $tdNaam = $('<td>').text(bestellijnen[i].naam);
-                let $tdEP = $('<td>').text(bestellijnen[i].eenheidsprijs);
-                let $tdAantal = $('<td>').text(bestellijnen[i].aantal);
-                let $tdSubtotaal = $('<td>').text(bestellijnen[i].subtotaal);
-                let $tr = $('<tr>');
-                let $bestelbody = $('#bestelbody'); 
-
-                $tr.append($tdNaam);
-                $tr.append($tdEP);
-                $tr.append($tdAantal);
-                $tr.append($tdSubtotaal);
+                return;
+            }
+            $bestellijnen.show();
+            let $bestelbody = $('#bestelbody');
+            $bestelbody.html('');
+            for(let i= 0; i< bestellijnen.length;i++){
+                $tdnaam = $('<td>').text(bestellijnen[i].naam);
+                $tdEP = $('<td>').text(bestellijnen[i].eenheidsprijs);
+                $tdaantal = $('<td>').text(bestellijnen[i].aantal);
+                $tdsubtotaal = $('<td>').text(bestellijnen[i].subtotaal);
+                $tr = $('<tr>');
+                $tr.append($tdnaam).append($tdEP).append($tdaantal).append($tdsubtotaal);
                 $bestelbody.append($tr);
-                $bestellijnen.show();
             }
         }
+
     </script>
 </head>
 <body>
     <select name="producten" id="producten">
-    </select>
+    </select><label>Aantal: <input type="number" value="0" id="aantal"></label>
+    <button id="btnToevoegen">Toevoegen</button>
     <table id="bestellijnen">
         <thead><tr><th>Naam</th><th>E.P.</th><th>Aantal</th><th>Subtotaal</th></tr></thead>
         <tbody id="bestelbody"></tbody>
